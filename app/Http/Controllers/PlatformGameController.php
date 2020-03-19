@@ -44,9 +44,9 @@ class PlatformGameController extends Controller
      * @param  \App\Platform_Game  $platform_Game
      * @return \Illuminate\Http\Response
      */
-    public function show(Platform_Game $platform_Game)
+    public function show($platform_Game)
     {
-        //
+        return view('game', ['platform_Game'=> Platform_Game::where('id', $platform_Game)->firstOrFail()]);
     }
 
     /**

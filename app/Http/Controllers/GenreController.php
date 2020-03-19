@@ -13,8 +13,8 @@ class GenresController extends Controller
         return view('genre', ['genre'=> Genre::where('id', $genre)->firstOrFail()]);
     }
 
-    public function index()
+    public function index($genre)
     {
-        return view('genre');
+        return view('genre', ['genre'=>Genre::where('id', $genre)->get()]);
     }
 }

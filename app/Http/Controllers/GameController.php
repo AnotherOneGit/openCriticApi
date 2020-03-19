@@ -14,7 +14,8 @@ class GameController extends Controller
      */
     public function index()
     {
-        return view('game');
+        $games=Game::all();
+        return view('games.index', ['games'=>$games]);
     }
 
     /**
@@ -42,11 +43,11 @@ class GameController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Game  $game
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Game $game)
+    public function show($game)
     {
-        //
+        return view('games.game', ['game'=> Game::where('id', $game)->firstOrFail()]);
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('layout')
 
 @section('content')
-    <h1>index genres</h1>
+    <h1>{{ $genre->name }}</h1>
 @endsection
