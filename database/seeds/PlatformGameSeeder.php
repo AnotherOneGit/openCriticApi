@@ -13,7 +13,7 @@ class PlatformGameSeeder extends Seeder
      */
     public function run()
     {
-        for ($num = 0; $num <= 100; $num++) {
+        for ($num = 15; $num <= 20; $num++) {
             $url = 'https://api.opencritic.com/api/game/' . $num;
             $eloquents = [json_decode(collect(Http::get($url)->json()))];
             foreach ($eloquents as $eloquent) {

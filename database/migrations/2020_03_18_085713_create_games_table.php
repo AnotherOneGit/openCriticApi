@@ -31,6 +31,7 @@ class CreateGamesTable extends Migration
             $table->boolean('isMajorTitle');
             $table->string('name');
             $table->text('description');
+            $table->timestamp('firstReleaseDate');
         });
     }
 

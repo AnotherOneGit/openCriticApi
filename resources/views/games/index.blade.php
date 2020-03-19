@@ -1,26 +1,10 @@
 @extends('layout')
 
 @section('content')
-    <div id="wrapper" style="text-align: center">
-        <div id="page" class="container">
-
-            @forelse ($games as $game)
-                <div class="content">
-                    <div class="title">
-                        <h2>
-                            <a href="{{ $game->id }}">
-                                {{ $game->name }}
-                            </a>
-                        </h2>
-                    </div>
-
-                    <p><img src="{{ $game->bannerScreenshot }}" alt="" class="image image-full" /> </p>
-
-                    {!! $game->excerpt !!}
-                </div>
-            @empty
-                <p>No relevant games yet</p>
-            @endforelse
-        </div>
-    </div>
+    @forelse ($games as $game)
+        <h2><a href="{{ $game->id }}">{{ $game->name }}</a></h2>
+        <img src="{{ $game->bannerScreenshot }}" alt=""/>
+    @empty
+        <p>No relevant games yet</p>
+    @endforelse
 @endsection

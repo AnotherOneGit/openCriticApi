@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/css/normalize.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="text-align: center">
         <div style="background: teal; text-align: center">
             <a href="https://opencritic.com"><img src="/logo-light.png" alt=""></a>
         </div>
