@@ -15,11 +15,11 @@
 </head>
 <body>
     <div class="container">
-        <div class="title m-b-md">
-            openCriticApi
+        <div style="background: teal; text-align: center">
+            <a href="https://opencritic.com"><img src="/logo-light.png" alt=""></a>
         </div>
 
-        <div class="links">
+        <div class="links" style="text-align: center">
             <a class="button {{ Request::path()==='/' ? 'button-primary' : ''}}" href="/">Main</a>
             <a class="button {{ Request::is('game*') ? 'button-primary' : ''}}" href="/game/">Games</a>
             <a class="button {{ Request::path()==='platform' ? 'button-primary' : ''}}" href="/platform">Platforms</a>

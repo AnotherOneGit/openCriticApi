@@ -1,15 +1,15 @@
 @extends('layout')
 
 @section('content')
-    <div id="wrapper">
+    <div id="wrapper" style="text-align: center">
         <div id="page" class="container">
 
             @forelse ($games as $game)
                 <div class="content">
                     <div class="title">
                         <h2>
-                            <a href="{{$game->id}}">
-                                {{$game->name}}
+                            <a href="{{ $game->id }}">
+                                {{ $game->name }}
                             </a>
                         </h2>
                     </div>
