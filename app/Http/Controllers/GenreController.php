@@ -40,14 +40,13 @@ class GenresController extends Controller
         return redirect('/genre');
     }
 
-    public function edit($id)
+    public function edit(Genre $genre)
     {
-        return view('genres.edit', ['genre'=> Genre::where('id', $id)->firstOrFail()]);
+        return view('genres.edit', compact('genre'));
     }
 
-    public function update($id)
+    public function update(Genre $genre)
     {
-        $genre=Genre::find($id);
 
         $genre->id=\request('id');
         $genre->name=\request('name');
