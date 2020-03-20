@@ -24,6 +24,7 @@
             <a class="button {{ Request::is('game*') ? 'button-primary' : ''}}" href="/game/">Games</a>
             <a class="button {{ Request::path()==='platform' ? 'button-primary' : ''}}" href="/platform">Platforms</a>
             <a class="button {{ Request::path()==='genre' ? 'button-primary' : ''}}" href="/genre">Genres</a>
+            <h1>{{ date("l") }}</h1>
         </div>
         @yield('content')
     </div>

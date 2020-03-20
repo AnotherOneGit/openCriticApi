@@ -15,7 +15,7 @@ class CreateGamesTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->bigInteger('id');
-            $table->string('reviewSummary')->nullable();
+            $table->text('reviewSummary')->nullable();
             $table->string('bannerScreenshot');
             $table->string('Rating')->nullable();
             $table->string('type');

@@ -13,11 +13,11 @@ class GameSeeder extends Seeder
      */
     public function run()
     {
-        for ($num = 15; $num <= 20; $num++) {
+        for ($num = 21; $num <= 100; $num++) {
             $url = 'https://api.opencritic.com/api/game/' . $num;
             $games = [json_decode(collect(Http::get($url)->json()))];
             foreach ($games as $game) {
-                if (isset($game->id) && isset($game->Rating->imageSrc)) {
+                if (isset($game->id)) {
                     DB::table('games')->insert([
                         'id' => $game->id,
                         'bannerScreenshot' => $game->bannerScreenshot->fullRes,
@@ -35,7 +35,8 @@ class GameSeeder extends Seeder
                         'name' => $game->name,
                         'description' => $game->description,
                         'firstReleaseDate' => substr($game->firstReleaseDate, 0, 10),
-                        'Rating' => $game->Rating->imageSrc,
+                        'Rating' => $game->Rating->value ?? 'unknown',
+                        'reviewSummary'=>$game->reviewSummary->summary ?? 'none',
                     ]);
                 }
 
