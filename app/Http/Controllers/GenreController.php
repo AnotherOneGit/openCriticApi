@@ -27,16 +27,8 @@ class GenresController extends Controller
 
     public function store()
     {
-        \request()->validate([
-            'id'=>'bail|required|unique:genres|max:11',
-            'name'=>'bail|required|unique:genres|max:255',
-        ]);
+        Genre::create($this->validateGenre());
 
-
-        $genre = new Genre();
-        $genre->id=\request('id');
-        $genre->name=\request('name');
-        $genre->save();
         return redirect('/genre');
     }
 
@@ -48,10 +40,20 @@ class GenresController extends Controller
     public function update(Genre $genre)
     {
 
-        $genre->id=\request('id');
-        $genre->name=\request('name');
-        $genre->save();
+        $genre->update($this->validateGenre());
+
         return redirect('/genre/'. $genre->id);
+    }
+
+    /**
+     * @return array
+     */
+    protected function validateGenre(): array
+    {
+        return \request()->validate([
+            'id' => 'bail|required|unique:genres|max:11',
+            'name' => 'bail|required|unique:genres|max:255',
+        ]);
     }
 
 }

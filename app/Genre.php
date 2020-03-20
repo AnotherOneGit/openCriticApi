@@ -7,6 +7,8 @@ use App\Game;
 
 class Genre extends Model
 {
+    protected $fillable = ['id', 'name'];
+
     public function game(){
         return $this->belongsToMany(Game::class);
     }
