@@ -14,7 +14,8 @@ class PlatformController extends Controller
      */
     public function index()
     {
-        return view('platform');
+        $platforms=Platform::all();
+        return view('platforms.index', ['platforms'=>$platforms]);
     }
 
     /**

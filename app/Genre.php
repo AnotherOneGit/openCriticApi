@@ -10,4 +10,7 @@ class Genre extends Model
     public function game(){
         return $this->belongsToMany(Game::class);
     }
+
+    public $timestamps = false;
+
 }

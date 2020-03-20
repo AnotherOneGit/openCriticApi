@@ -23,8 +23,7 @@
             <a class="button {{ Request::path()==='/' ? 'button-primary' : ''}}" href="/">Main</a>
             <a class="button {{ Request::is('game*') ? 'button-primary' : ''}}" href="/game/">Games</a>
             <a class="button {{ Request::path()==='platform' ? 'button-primary' : ''}}" href="/platform">Platforms</a>
-            <a class="button {{ Request::path()==='genre' ? 'button-primary' : ''}}" href="/genre">Genres</a>
-            <h1>{{ date("l") }}</h1>
+            <a class="button {{ Request::is('genre*') ? 'button-primary' : ''}}" href="/genre">Genres</a>
         </div>
         @yield('content')
     </div>

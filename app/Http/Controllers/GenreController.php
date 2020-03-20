@@ -8,13 +8,51 @@ use App\Genre;
 
 class GenresController extends Controller
 {
-    public function show($genre)
+
+    public function index()
     {
-        return view('genre', ['genre'=> Genre::where('id', $genre)->firstOrFail()]);
+        $genres=Genre::all();
+        return view('genres.index', ['genres'=>$genres]);
     }
 
-    public function index($genre)
+    public function show(Genre $genre)
     {
-        return view('genre', ['genre'=>Genre::where('id', $genre)->get()]);
+        return view('genres.genre', ['genre'=> $genre]);
     }
+
+    public function create()
+    {
+        return view('genres.create');
+    }
+
+    public function store()
+    {
+        \request()->validate([
+            'id'=>'bail|required|unique:genres|max:11',
+            'name'=>'bail|required|unique:genres|max:255',
+        ]);
+
+
+        $genre = new Genre();
+        $genre->id=\request('id');
+        $genre->name=\request('name');
+        $genre->save();
+        return redirect('/genre');
+    }
+
+    public function edit($id)
+    {
+        return view('genres.edit', ['genre'=> Genre::where('id', $id)->firstOrFail()]);
+    }
+
+    public function update($id)
+    {
+        $genre=Genre::find($id);
+
+        $genre->id=\request('id');
+        $genre->name=\request('name');
+        $genre->save();
+        return redirect('/genre/'. $genre->id);
+    }
+
 }
