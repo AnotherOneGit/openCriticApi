@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="container" style="text-align: center">
-        <div style="background: teal; text-align: center">
+        <div style="background: #e5af2f; text-align: center">
             <a href="https://opencritic.com"><img src="/logo-light.png" alt=""></a>
         </div>
 
