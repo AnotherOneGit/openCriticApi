@@ -19,7 +19,7 @@ class CreateGenresTable extends Migration
         });
 
         Schema::create('game_genre', function (Blueprint $table) {
-            $table->bigInteger('id');
+            $table->bigInteger('id')->autoIncrement();
             $table->unsignedBigInteger('game_id');
             $table->unsignedBigInteger('genre_id');
 
