@@ -17,6 +17,17 @@ class CreateGenresTable extends Migration
             $table->bigInteger('id');
             $table->string('name');
         });
+
+        Schema::create('game_genre', function (Blueprint $table) {
+            $table->bigInteger('id');
+            $table->unsignedBigInteger('game_id');
+            $table->unsignedBigInteger('genre_id');
+
+            $table->unique(['game_id', 'genre_id']);
+
+//            $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
+//            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
+        });
     }
 
     /**

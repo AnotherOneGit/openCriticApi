@@ -10,11 +10,11 @@ class Game extends Model
 {
     public function genres()
     {
-        return $this->hasMany(Genre::class);
+        return $this->belongsToMany(Genre::class);
     }
 
     public function platforms()
     {
-        return $this->hasMany(Platform::class);
+        return $this->belongsToMany(Platform::class);
     }
 }
