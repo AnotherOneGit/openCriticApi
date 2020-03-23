@@ -47,7 +47,7 @@ class PlatformController extends Controller
      */
     public function show(Platform $platform)
     {
-        //
+        return view('platforms.platform', ['platform'=> $platform]);
     }
 
     /**
@@ -70,7 +70,7 @@ class PlatformController extends Controller
      */
     public function update(Request $request, Platform $platform)
     {
-        //
+//        return redirect($platform->path());
     }
 
     /**

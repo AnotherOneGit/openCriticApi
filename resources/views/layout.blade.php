@@ -21,8 +21,8 @@
 
         <div class="links" style="text-align: center">
             <a class="button {{ Request::path()==='/' ? 'button-primary' : ''}}" href="/">Main</a>
-            <a class="button {{ Request::is('game*') ? 'button-primary' : ''}}" href="/game/">Games</a>
-            <a class="button {{ Request::path()==='platform' ? 'button-primary' : ''}}" href="/platform">Platforms</a>
+            <a class="button {{ Request::is('game*') ? 'button-primary' : ''}}" href="{{ route('game.index') }}">Games</a>
+            <a class="button {{ Request::is('platform*') ? 'button-primary' : ''}}" href="{{ route('platform.index') }}">Platforms</a>
             <a class="button {{ Request::is('genre*') ? 'button-primary' : ''}}" href="/genre">Genres</a>
         </div>
         @yield('content')

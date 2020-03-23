@@ -44,8 +44,8 @@ Route::get('/genre/{genre}', 'GenresController@show');
 Route::get('/genre/{genre}/edit', 'GenresController@edit');
 Route::put('/genre/{genre}', 'GenresController@update');
 
-Route::get('/platform', 'PlatformController@index');
-Route::get('/platform/{platform}', 'PlatformController@show');
+Route::get('/platform', 'PlatformController@index')->name('platform.index');
+Route::get('/platform/{platform}', 'PlatformController@show')->name('platform.show');
 
-Route::get('/game', 'GameController@index');
-Route::get('/game/{game}', 'GameController@show');
+Route::get('/game', 'GameController@index')->name('game.index');
+Route::get('/game/{game}', 'GameController@show')->name('game.show');
