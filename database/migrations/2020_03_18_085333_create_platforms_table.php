@@ -19,6 +19,14 @@ class CreatePlatformsTable extends Migration
             $table->string('shortName');
             $table->string('imageSrc');
         });
+
+        Schema::create('game_platform', function (Blueprint $table) {
+            $table->bigInteger('id')->autoIncrement();
+            $table->unsignedBigInteger('game_id');
+            $table->unsignedBigInteger('platform_id');
+
+            $table->unique(['game_id', 'platform_id']);
+        });
     }
 
     /**
