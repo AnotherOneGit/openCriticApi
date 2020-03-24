@@ -30,6 +30,28 @@
                         @enderror
                     </div>
                 </div>
+
+
+
+                <div>
+                    <label for="genre">Genre</label>
+                    <div>
+                        <select name="genre[]" id="genre"
+                               @error('name') style="border: 1px solid red" @enderror
+                               value="{{ old('name') }}"
+                        >
+                            @foreach($genres as $genre)
+                                <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('genre')
+                        <p style="color: red">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+
+
                 <br>
                 <input type="submit" value="Create Genre!" class="button button-primary">
             </form>

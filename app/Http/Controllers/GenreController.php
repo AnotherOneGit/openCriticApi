@@ -22,7 +22,9 @@ class GenresController extends Controller
 
     public function create()
     {
-        return view('genres.create');
+        return view('genres.create', [
+            'genres'=>Genre::all()
+        ]);
     }
 
     public function store()
