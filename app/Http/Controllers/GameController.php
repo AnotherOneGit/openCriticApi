@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\Genre;
+use App\Platform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,12 +17,14 @@ class GameController extends Controller
      */
     public function index()
     {
-        if (\request('genre'))
-        {
+        if (\request('genre')) {
             $games = Genre::where('name', \request('genre'))->firstOrFail()->game;
+        } elseif (\request('platform'))
+        {
+            $games = Platform::where('name', \request('platform'))->firstOrFail()->game;
         } else {
             $games=Game::all()
-//                ->sortByDesc('percentile')->whereNotIn('Rating', 'T')->where('percentile', '<',30)
+//                ->sortByDesc('percentile')->whereNotIn('Rating', 'T')->where('percentile', '>',70)
             ;
         }
 

@@ -49,3 +49,5 @@ Route::get('/platform/{platform}', 'PlatformController@show')->name('platform.sh
 
 Route::get('/game', 'GameController@index')->name('game.index');
 Route::get('/game/{game}', 'GameController@show')->name('game.show');
+
+Route::get('/search', 'SearchController@index')->name('search');

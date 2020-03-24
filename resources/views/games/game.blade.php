@@ -5,7 +5,7 @@
     <img src="{{ $game->bannerScreenshot }}" alt="{{ $game->name }}">
     <p>{{ $game->description }}</p>
     <br>
-
+    {{ count($game->platforms) }}
     <p>
         @foreach($game->genres as $genre)
             <a href="{{ route('game.index', ['genre'=>$genre->name]) }}">{{ $genre->name }}</a>

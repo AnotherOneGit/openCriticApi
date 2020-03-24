@@ -13,7 +13,7 @@ class GameSeeder extends Seeder
      */
     public function run()
     {
-        for ($num = 15; $num <= 30; $num++) {
+        for ($num = 101; $num <= 500; $num++) {
             $url = 'https://api.opencritic.com/api/game/' . $num;
             $games = [json_decode(collect(Http::get($url)->json()))];
             foreach ($games as $game) {

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Game;
-use App\Platform;
+use App\Search;
 use Illuminate\Http\Request;
 
-class PlatformController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class PlatformController extends Controller
      */
     public function index()
     {
-        $platforms=Platform::all();
-        return view('platforms.index', ['platforms'=>$platforms]);
+        return view('search');
     }
 
     /**
@@ -43,21 +41,21 @@ class PlatformController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Platform  $platform
+     * @param  \App\Search  $search
      * @return \Illuminate\Http\Response
      */
-    public function show(Platform $platform)
+    public function show(Search $search)
     {
-        return view('platforms.platform', ['platform'=> $platform, 'games'=>Game::all()]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Platform  $platform
+     * @param  \App\Search  $search
      * @return \Illuminate\Http\Response
      */
-    public function edit(Platform $platform)
+    public function edit(Search $search)
     {
         //
     }
@@ -66,21 +64,21 @@ class PlatformController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Platform  $platform
+     * @param  \App\Search  $search
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Platform $platform)
+    public function update(Request $request, Search $search)
     {
-//        return redirect($platform->path());
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Platform  $platform
+     * @param  \App\Search  $search
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Platform $platform)
+    public function destroy(Search $search)
     {
         //
     }

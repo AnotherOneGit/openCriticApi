@@ -2,6 +2,36 @@
 
 @section('content')
     <h1>{{ date("l") }}</h1>
+
+    <form action="" method="get">
+        <label for="tier">Tier</label>
+        <input type="checkbox" name="tier" id="tier">
+        <input type="submit" value="Tier">
+    </form>
+@if (request('tier'))
+    <p>tier</p>
+@endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="flex-center position-ref full-height">
     @if (Route::has('login'))
         <div class="top-right links">
