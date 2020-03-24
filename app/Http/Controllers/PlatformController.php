@@ -15,8 +15,15 @@ class PlatformController extends Controller
      */
     public function index()
     {
-        $platforms=Platform::all();
-        return view('platforms.index', ['platforms'=>$platforms]);
+        if (\request('platform'))
+        {
+            $games = Platform::where('name', \request('platform'))->firstOrFail()->game;
+            return view('games.index', ['games'=>$games]);
+        } else {
+            $platforms = Platform::all();
+        }
+            return view('platforms.index', ['platforms' => $platforms]);
+
     }
 
     /**
@@ -48,7 +55,7 @@ class PlatformController extends Controller
      */
     public function show(Platform $platform)
     {
-        return view('platforms.platform', ['platform'=> $platform, 'games'=>Game::all()]);
+        return view('platforms.platform', ['platform'=> $platform, 'games'=>Platform::where('name', \request('platform'))->firstOrFail()->game]);
     }
 
     /**

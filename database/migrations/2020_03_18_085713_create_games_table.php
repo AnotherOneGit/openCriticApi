@@ -32,6 +32,7 @@ class CreateGamesTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->timestamp('firstReleaseDate');
+            $table->boolean('exclusive')->nullable();
         });
     }
 

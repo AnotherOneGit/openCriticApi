@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Game;
 use App\Genre;
 use App\Platform;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -22,10 +24,14 @@ class GameController extends Controller
         } elseif (\request('platform'))
         {
             $games = Platform::where('name', \request('platform'))->firstOrFail()->game;
-        } else {
+        } else if (\request('sort')) {
             $games=Game::all()
-//                ->sortByDesc('percentile')->whereNotIn('Rating', 'T')->where('percentile', '>',70)
+                ->where('isMajorTitle', '=', \request('tier'))
+                ->where('tier', '=', 'Strong')
+                ->sortByDesc(\request('sort'))
             ;
+        } else {
+            $games=Game::all();
         }
 
         return view('games.index', ['games'=>$games]);
@@ -44,7 +50,7 @@ class GameController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return void
      */
     public function store(Request $request)
@@ -55,8 +61,8 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Game  $game
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Game $game
+     * @return Factory|View
      */
     public function show($game)
     {
@@ -66,7 +72,7 @@ class GameController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Game  $game
+     * @param Game $game
      * @return void
      */
     public function edit(Game $game)
@@ -77,8 +83,8 @@ class GameController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Game  $game
+     * @param Request $request
+     * @param Game $game
      * @return void
      */
     public function update(Request $request, Game $game)
@@ -89,7 +95,7 @@ class GameController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Game  $game
+     * @param Game $game
      * @return void
      */
     public function destroy(Game $game)
