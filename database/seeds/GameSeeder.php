@@ -13,31 +13,34 @@ class GameSeeder extends Seeder
      */
     public function run()
     {
-        for ($num = 15; $num <= 30; $num++) {
+        for ($num = 15; $num <= 55; $num++) {
             $url = 'https://api.opencritic.com/api/game/' . $num;
             $games = [json_decode(collect(Http::get($url)->json()))];
             foreach ($games as $game) {
                 if (isset($game->id)) {
-                    DB::table('games')->insert([
-                        'id' => $game->id,
-                        'bannerScreenshot' => $game->bannerScreenshot->fullRes,
-                        'type' => $game->type,
-                        'percentRecommended' => $game->percentRecommended,
-                        'numReviews' => $game->numReviews,
-                        'numTopCriticReviews' => $game->numTopCriticReviews,
-                        'medianScore' => $game->medianScore,
-                        'averageScore' => $game->averageScore,
-                        'topCriticScore' => $game->topCriticScore,
-                        'percentile' => $game->percentile,
-                        'tier' => $game->tier,
-                        'hasLootBoxes' => $game->hasLootBoxes,
-                        'isMajorTitle' => $game->isMajorTitle,
-                        'name' => $game->name,
-                        'description' => $game->description,
-                        'firstReleaseDate' => substr($game->firstReleaseDate, 0, 10),
-                        'Rating' => $game->Rating->value ?? 'unknown',
-                        'reviewSummary'=>$game->reviewSummary->summary ?? 'none',
-                    ]);
+                    if (count($game->Platforms)==1) {
+                        DB::table('games')->insert([
+                            'id' => $game->id,
+                            'bannerScreenshot' => $game->bannerScreenshot->fullRes,
+                            'type' => $game->type,
+                            'percentRecommended' => $game->percentRecommended,
+                            'numReviews' => $game->numReviews,
+                            'numTopCriticReviews' => $game->numTopCriticReviews,
+                            'medianScore' => $game->medianScore,
+                            'averageScore' => $game->averageScore,
+                            'topCriticScore' => $game->topCriticScore,
+                            'percentile' => $game->percentile,
+                            'tier' => $game->tier,
+                            'hasLootBoxes' => $game->hasLootBoxes,
+                            'isMajorTitle' => $game->isMajorTitle,
+                            'name' => $game->name,
+                            'description' => $game->description,
+                            'firstReleaseDate' => substr($game->firstReleaseDate, 0, 10),
+                            'Rating' => $game->Rating->value ?? 'unknown',
+                            'reviewSummary' => $game->reviewSummary->summary ?? 'none',
+                            'platform'=>$game->Platforms[0]->name,
+                        ]);
+                    }
                 }
 
 //                for ($num = 15; $num <= 20; $num++) {

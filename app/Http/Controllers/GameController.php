@@ -24,15 +24,32 @@ class GameController extends Controller
         } elseif (\request('platform'))
         {
             $games = Platform::where('name', \request('platform'))->firstOrFail()->game;
-        } else if (\request('sort')) {
-            $games=Game::all()
-                ->where('isMajorTitle', '=', \request('tier'))
-                ->where('tier', '=', 'Strong')
-                ->sortByDesc(\request('sort'))
-            ;
-        } else {
-            $games=Game::all();
+        } else
+//            if (\request('sort'))
+        {
+            $games = DB::select('
+SELECT games.name, games.id, game_platform.platform_id
+  FROM games
+  JOIN game_platform
+  ON games.id = game_platform.game_id
+  WHERE games.id IN
+(
+SELECT game_id
+FROM game_platform
+GROUP BY game_id
+HAVING COUNT(*)=1
+ )
+  ');
+//                ->join('game_platform', 'games.id', '=', 'game_platform.game_id')
+//                ->join('platforms', 'platforms.id', '=', 'game_platform.platform_id')
+//                ->where('games.name')
+//                ->where('isMajorTitle', '=', \request('tier'))
+//                ->where('tier', '=', 'Strong')
+//                ->sortByDesc(\request('sort'));
         }
+//        } else {
+//            $games=Game::all();
+//        }
 
         return view('games.index', ['games'=>$games]);
     }

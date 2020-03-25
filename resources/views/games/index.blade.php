@@ -15,9 +15,9 @@
 </form>
     @forelse ($games as $game)
 {{--        @if(count($game->platforms) == 1)--}}
-            <h2><a href="game/{{ $game->id }}">{{ $game->name }}</a></h2>
-        <img src="{{ $game->bannerScreenshot }}" alt="" height="175" width="350"/>
-        <h3>{{ $game->medianScore }}, {{ $game->averageScore }}, {{ $game->topCriticScore }}, {{ $game->tier }}, {{ $game->isMajorTitle }}</h3>
+            <h2><a href="/game/{{ $game->id }}">{{ $game->name }}</a></h2>
+{{--        <img src="{{ $game->bannerScreenshot }}" alt="" height="175" width="350"/>--}}
+{{--        <h3>{{ $game->medianScore }}, {{ $game->averageScore }}, {{ $game->topCriticScore }}, {{ $game->tier }}, {{ $game->isMajorTitle }}</h3>--}}
             <br>
 {{--        @endif--}}
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Platform;
 use App\Search;
 use Illuminate\Http\Request;
+use function GuzzleHttp\Promise\all;
 
 class SearchController extends Controller
 {
@@ -14,7 +16,7 @@ class SearchController extends Controller
      */
     public function index()
     {
-        return view('search');
+        return ;
     }
 
     /**
