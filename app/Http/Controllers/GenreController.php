@@ -53,7 +53,7 @@ class GenresController extends Controller
     protected function validateGenre(): array
     {
         return \request()->validate([
-            'id' => 'bail|required|unique:genres|max:11',
+            'id' => 'bail|required|max:11',
             'name' => 'bail|required|unique:genres|max:255',
         ]);
     }

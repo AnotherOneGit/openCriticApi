@@ -1,5 +1,8 @@
 <?php
 
+use App\Game;
+use App\Genre;
+use App\Platform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +19,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/game', function (){
+   return Game::all();
+});
+
+Route::get('/platform', function (){
+    return Platform::all();
+});
+
+Route::get('/genre', function () {
+    return Genre::all();
 });

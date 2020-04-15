@@ -51,7 +51,7 @@ class GameController extends Controller
             $games=Game::all();
         }
 
-        return view('games.index', ['games'=>$games]);
+        return \view('games.index', ['games'=>Game::all()]);
     }
 
     /**
