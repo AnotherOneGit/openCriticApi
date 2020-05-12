@@ -27,31 +27,23 @@ class GameController extends Controller
         } elseif (\request('sort'))
         {
             $games = Game::all()->sortByDesc(\request('sort'));
-//                DB::select('
-//SELECT games.name, games.id, game_platform.platform_id
-//  FROM games
-//  JOIN game_platform
-//  ON games.id = game_platform.game_id
-//  WHERE games.id IN
-//(
-//SELECT game_id
-//FROM game_platform
-//GROUP BY game_id
-//HAVING COUNT(*)=1
-// )
-//  ');
-//                ->join('game_platform', 'games.id', '=', 'game_platform.game_id')
-//                ->join('platforms', 'platforms.id', '=', 'game_platform.platform_id')
-//                ->where('games.name')
-//                ->where('isMajorTitle', '=', \request('tier'))
-//                ->where('tier', '=', 'Strong')
-//                ->sortByDesc(\request('sort'));
+        }
+        elseif (\request('exclusive'))
+        {
+            $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
+            $platformArrayFiltered = array_diff($platformArray, array(request('exclusive')));
+            $games=Game::all()
+//                ->where(\request('exclusive'), 1)
+                              ->where($platformArrayFiltered[0], 0)
+                              ->where($platformArrayFiltered[1], 0)
+//                              ->where('Sony', 0)
+            ;
         }
          else {
             $games=Game::all();
         }
 
-        return \view('games.index', ['games'=>Game::all()]);
+        return \view('games.index', ['games'=>$games]);
     }
 
     /**

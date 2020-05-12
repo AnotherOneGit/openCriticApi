@@ -22,7 +22,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/game', function (){
-   return Game::all();
+    if (\request('platform')) {
+        return Platform::where('name', \request('platform'))->firstOrFail()->game;
+    } else {
+        return Game::all();
+    }
 });
 
 Route::get('/platform', function (){
@@ -31,4 +35,8 @@ Route::get('/platform', function (){
 
 Route::get('/genre', function () {
     return Genre::all();
+});
+
+Route::get('/game/{game}', function ($game) {
+    return Game::where('id', $game)->firstOrFail();
 });

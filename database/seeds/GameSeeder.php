@@ -6,19 +6,15 @@ use Illuminate\Support\Facades\Http;
 
 class GameSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        for ($num = 15; $num <= 55; $num++) {
+        for ($num = 301; $num <= 1000; $num++) {
             $url = 'https://api.opencritic.com/api/game/' . $num;
             $games = [json_decode(collect(Http::get($url)->json()))];
             foreach ($games as $game) {
                 if (isset($game->id)) {
-                    if (count($game->Platforms)==1) {
+//                    $array = array_column($game->Platforms, 'id');
+//                    if (in_array(7, $array)) {
                         DB::table('games')->insert([
                             'id' => $game->id,
                             'bannerScreenshot' => $game->bannerScreenshot->fullRes,
@@ -38,30 +34,12 @@ class GameSeeder extends Seeder
                             'firstReleaseDate' => substr($game->firstReleaseDate, 0, 10),
                             'Rating' => $game->Rating->value ?? 'unknown',
                             'reviewSummary' => $game->reviewSummary->summary ?? 'none',
-                            'platform'=>$game->Platforms[0]->name,
+                            'Sony' => in_array(6, array_column($game->Platforms, 'id'))|| in_array(31, array_column($game->Platforms, 'id')) || in_array(33, array_column($game->Platforms, 'id')),
+                            'Microsoft' => in_array(7, array_column($game->Platforms, 'id'))|| in_array(27, array_column($game->Platforms, 'id')),
+                            'Nintendo' => in_array(26, array_column($game->Platforms, 'id')) || in_array(32, array_column($game->Platforms, 'id')) || in_array(36, array_column($game->Platforms, 'id')),
                         ]);
                     }
                 }
-
-//                for ($num = 15; $num <= 20; $num++) {
-//                    $url = 'https://api.opencritic.com/api/game/' . $num;
-//                    $games = [json_decode(collect(Http::get($url)->json()))];
-//                    foreach ($games as $game) {
-//                        if (isset($game->Rating->value)) {
-//                            DB::table('games')->update([
-//                                'Rating' => $game->Rating->value,
-//                            ]);
-//                        }
-//
-//            if (isset($game->reviewSummary->summary))
-//            {
-//                DB::table('games')->insert([
-//                    'reviewSummary'=>$game->reviewSummary->summary,
-//                ]);
-//            }
-
                     }
                 }
-
-            }
-        }
+}

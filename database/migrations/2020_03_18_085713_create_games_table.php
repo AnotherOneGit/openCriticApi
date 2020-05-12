@@ -32,7 +32,10 @@ class CreateGamesTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->timestamp('firstReleaseDate');
-            $table->string('Platform');
+//            $table->string('Platform');
+            $table->boolean('Sony')->nullable();
+            $table->boolean('Microsoft')->nullable();
+            $table->boolean('Nintendo')->nullable();
         });
     }
 

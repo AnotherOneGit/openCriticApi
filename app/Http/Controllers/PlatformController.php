@@ -23,7 +23,6 @@ class PlatformController extends Controller
             $platforms = Platform::all();
         }
             return view('platforms.index', ['platforms' => $platforms]);
-
     }
 
     /**
