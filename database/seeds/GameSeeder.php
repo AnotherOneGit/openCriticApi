@@ -13,8 +13,6 @@ class GameSeeder extends Seeder
             $games = [json_decode(collect(Http::get($url)->json()))];
             foreach ($games as $game) {
                 if (isset($game->id)) {
-//                    $array = array_column($game->Platforms, 'id');
-//                    if (in_array(7, $array)) {
                         DB::table('games')->insert([
                             'id' => $game->id,
                             'bannerScreenshot' => $game->bannerScreenshot->fullRes,

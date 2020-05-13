@@ -4,6 +4,11 @@
     <p> Count: {{count($games)}} </p>
     <hr>
     <form action="/game">
+{{--        <label for="sort">Sort By</label>--}}
+{{--        <select name="sort" id="sort">--}}
+{{--            <option value="none">none</option>--}}
+{{--            <option value="averageScore">Average Score</option>--}}
+{{--        </select>--}}
     <label for="exclusive">Exclusive</label>
     <select name="exclusive" id="exclusive">
         <option value="all">Select platform</option>
@@ -16,17 +21,18 @@
     </form>
         <hr>
     @forelse ($games as $game)
-{{count($game->platforms)}}
+            {{count($game->platforms)}}
             <h2><a href="/game/{{ $game->id }}">{{ $game->name }}</a></h2>
-{{--        <img src="{{ $game->bannerScreenshot }}" alt="" height="175" width="350"/>--}}
-{{--        <h3>Median Score: {{ $game->medianScore }}, Average Score: {{ $game->averageScore }}, Top Critic Score: {{ $game->topCriticScore }}</h3>--}}
+        <img src="{{ $game->bannerScreenshot }}" alt="" height="200" width="350"/>
+        <h3>Average Score: {{ $game->averageScore }}</h3>
+<h4>First Release Year: {{\Carbon\Carbon::parse($game->firstReleaseDate)->format('Y')}}</h4>
             <br>
-{{--        @endif--}}
-
-
     @empty
         <br>
         <p>No relevant games yet</p>
     @endforelse
-{{--    <p>That's All Folks!</p>--}}
+{{--    <div>--}}
+{{--        {{ $games->links() }}--}}
+{{--    </div>--}}
+    <p>That's All Folks!</p>
 @endsection

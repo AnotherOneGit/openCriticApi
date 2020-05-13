@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 
 class GameController extends Controller
 {
@@ -20,10 +21,14 @@ class GameController extends Controller
     public function index()
     {
         if (\request('genre')) {
-            $games = Genre::where('name', \request('genre'))->firstOrFail()->game;
+            $games = Genre::where('name', \request('genre'))->firstOrFail()->game
+                ->sortByDesc('averageScore')
+            ;
         } elseif (\request('platform'))
         {
-            $games = Platform::where('name', \request('platform'))->firstOrFail()->game;
+            $games = Platform::where('name', \request('platform'))->firstOrFail()->game
+                ->sortByDesc('averageScore')
+            ;
         } elseif (\request('sort'))
         {
             $games = Game::all()->sortByDesc(\request('sort'));
@@ -34,10 +39,13 @@ class GameController extends Controller
             $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
             $games=Game::all()->where($platformArrayFiltered[0], 0)
                               ->where($platformArrayFiltered[1], 0)
+                ->sortByDesc('averageScore')
             ;
         }
          else {
-            $games=Game::all();
+            $games=Game::all()
+                ->sortByDesc('averageScore')
+            ;
         }
 
         return \view('games.index', ['games'=>$games]);
