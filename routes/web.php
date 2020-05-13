@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
-    $platformArrayFiltered = array_diff_assoc($platformArray, [request('name')]);
+    $platformArray = ['microsoft', 'sony', 'nintendo', 'all'];
+    $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
     return $platformArrayFiltered;
     return view('welcome');
 });

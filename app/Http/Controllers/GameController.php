@@ -31,12 +31,9 @@ class GameController extends Controller
         elseif (\request('exclusive'))
         {
             $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
-            $platformArrayFiltered = array_diff($platformArray, array(request('exclusive')));
-            $games=Game::all()
-//                ->where(\request('exclusive'), 1)
-                              ->where($platformArrayFiltered[0], 0)
+            $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
+            $games=Game::all()->where($platformArrayFiltered[0], 0)
                               ->where($platformArrayFiltered[1], 0)
-//                              ->where('Sony', 0)
             ;
         }
          else {
