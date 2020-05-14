@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Game;
 use App\Genre;
 use App\Platform;
+use App\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,37 +19,68 @@ class GameController extends Controller
      *
      * @return Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        if (\request('genre')) {
-            $games = Genre::where('name', \request('genre'))->firstOrFail()->game
-                ->sortByDesc('averageScore')
-            ;
-        } elseif (\request('platform'))
-        {
-            $games = Platform::where('name', \request('platform'))->firstOrFail()->game
-                ->sortByDesc('averageScore')
-            ;
-        } elseif (\request('sort'))
-        {
-            $games = Game::all()->sortByDesc(\request('sort'));
-        }
-        elseif (\request('exclusive'))
-        {
-            $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
-            $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
-            $games=Game::all()->where($platformArrayFiltered[0], 0)
-                              ->where($platformArrayFiltered[1], 0)
-                ->sortByDesc('averageScore')
-            ;
-        }
-         else {
-            $games=Game::all()
-                ->sortByDesc('averageScore')
-            ;
+
+        $games=Game::with('platforms');
+
+        if ($request->has('name')) {
+            $games->where('name', 'like', "%$request->name%");
         }
 
-        return \view('games.index', ['games'=>$games]);
+        if ($request->has('is_major')) {
+            $games->where('isMajorTitle', $request->is_major);
+        }
+
+        if ($request->has('tier')) {
+            $games->where('tier', $request->tier);
+        }
+
+        if ($request->has('exclusive')) {
+            $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
+            $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
+            $games->where($platformArrayFiltered[0], 0)
+            ->where($platformArrayFiltered[1], 0);
+        }
+
+//        if ($request->has('genre')) {
+//            $games = Genre::where('name', \request('genre'))->firstOrFail()->game;
+//        }
+//
+//        if ($request->has('platform')) {
+//            $games = Platform::where('name', \request('platform'))->firstOrFail()->game;
+//        }
+
+        $games = $games->paginate(600);
+
+
+
+
+
+
+
+
+            ;
+//        } elseif (\request('sort'))
+//        {
+//            $games = Game::all()->sortByDesc(\request('sort'));
+//        }
+//        elseif (\request('exclusive'))
+//        {
+//            $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
+//            $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
+//            $games=Game::all()->where($platformArrayFiltered[0], 0)
+//                              ->where($platformArrayFiltered[1], 0)
+//                ->sortByDesc('averageScore')
+//            ;
+//        }
+//         else {
+//            $games=Game::all()
+//                ->sortByDesc('averageScore')
+//            ;
+//        }
+
+        return view('games.index', ['games'=>$games]);
     }
 
     /**

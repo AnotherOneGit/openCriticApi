@@ -9,8 +9,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/genre', 'GenresController@index');
-Route::post('/genre', 'GenresController@store');
+Route::get('/genre', 'GenresController@index')->name('genre.index');
+Route::post('/genre', 'GenresController@store')->name('genre.show');
 Route::get('/genre/create', 'GenresController@create');
 Route::get('/genre/{genre}', 'GenresController@show');
 Route::get('/genre/{genre}/edit', 'GenresController@edit');

@@ -10,7 +10,7 @@
     @foreach($platforms as $platform)
         <a href="/game/{{ $platform->id }}">{{ $platform->name }}</a>
         <br>
-        <img src="{{ $platform->bannerScreenshot }}" alt="">
+        <img src="{{ $platform->imageSrc }}" alt="asd">
         <br>
     @endforeach
 

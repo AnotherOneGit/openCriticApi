@@ -12,6 +12,14 @@
     <!-- Styles -->
     <link rel="stylesheet" href="/css/skeleton.css">
     <link rel="stylesheet" href="/css/normalize.css">
+    <style>
+        .page-item {
+            display: inline-block;
+            padding: 9px;
+            font-weight: bolder;
+            font-size: x-large;
+        }
+    </style>
 </head>
 <body>
     <div class="container" style="text-align: center">

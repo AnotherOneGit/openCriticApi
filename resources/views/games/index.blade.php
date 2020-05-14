@@ -9,21 +9,46 @@
 {{--            <option value="none">none</option>--}}
 {{--            <option value="averageScore">Average Score</option>--}}
 {{--        </select>--}}
-    <label for="exclusive">Exclusive</label>
+        <label>Name
+            <input type="text" name="name" value="{{ request()->name }}">
+        </label>
+
+        <label for="exclusive">Exclusive
     <select name="exclusive" id="exclusive">
-        <option value="all">Select platform</option>
-        <option value="Sony">Sony</option>
-        <option value="Microsoft">Microsoft</option>
-        <option value="Nintendo">Nintendo</option>
+        <option disabled selected value>Select platform</option>
+        <option value="Sony" {{ request()->exclusive == 'Sony' ? 'selected' : '' }}>Sony</option>
+        <option value="Microsoft"{{ request()->exclusive == 'Microsoft' ? 'selected' : '' }}>Microsoft</option>
+        <option value="Nintendo"{{ request()->exclusive == 'Nintendo' ? 'selected' : '' }}>Nintendo</option>
     </select>
-    <button type="submit">Go!</button>
+        </label>
+
+        <label>Major
+{{--            <input type="radio" name="is_major">--}}
+            <input type="checkbox" name="is_major" value="1" id="is_major" {{ request()->is_major == 1 ? 'checked' : '' }}>
+        </label>
+
+        <label for="tier">Tier
+        <select name="tier" id="tier">
+            <option disabled selected value>All</option>
+            <option value="Mighty" {{ request()->tier == 'Mighty' ? 'selected' : ''}}>Mighty!!!</option>
+            <option value="Strong" {{ request()->tier == 'Strong' ? 'selected' : ''}}>Strong!!</option>
+            <option value="Fair" {{ request()->tier == 'Fair' ? 'selected' : ''}}>Fair!</option>
+            <option value="Weak" {{ request()->tier == 'Weak' ? 'selected' : ''}}>Weak</option>
+        </select>
+        </label>
+        <br>
+
+        <button type="submit">Go!</button>
         <a href="/game">All games</a>
     </form>
         <hr>
     @forelse ($games as $game)
             {{count($game->platforms)}}
             <h2><a href="/game/{{ $game->id }}">{{ $game->name }}</a></h2>
-        <img src="{{ $game->bannerScreenshot }}" alt="" height="200" width="350"/>
+{{--        <img src="{{ $game->bannerScreenshot }}" alt="" height="200" width="350"/>--}}
+            <p>Major?: {{ $game->isMajorTitle ? 'Major' : 'Minor' }}</p>
+            <p>Loot: {{ $game->hasLootBoxes ? 'Yep' : 'Nein' }}</p>
+            <strong>{{ $game->tier }}</strong>
         <h3>Average Score: {{ $game->averageScore }}</h3>
 <h4>First Release Year: {{\Carbon\Carbon::parse($game->firstReleaseDate)->format('Y')}}</h4>
             <br>
@@ -31,8 +56,5 @@
         <br>
         <p>No relevant games yet</p>
     @endforelse
-{{--    <div>--}}
-{{--        {{ $games->links() }}--}}
-{{--    </div>--}}
-    <p>That's All Folks!</p>
+{{--        {{ $games->appends($_GET)->links() }}--}}
 @endsection
