@@ -51,7 +51,8 @@ class GameController extends Controller
 //            $games = Platform::where('name', \request('platform'))->firstOrFail()->game;
 //        }
 
-        $games = $games->paginate(600);
+
+        $games = $games->get();
 
 
 

@@ -21,12 +21,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/game', function (){
-    if (\request('platform')) {
-        return Platform::where('name', \request('platform'))->firstOrFail()->game;
-    } else {
-        return Game::all();
+Route::get('/game', function (Request $request) {
+    $games = Game::all();
+//
+//    if ($request->has('name')) {
+//        $games->where('name', 'like', "%$request->name%");
+//    }
+//
+//    if ($request->has('is_major')) {
+//        $games->where('isMajorTitle', $request->is_major);
+//    }
+//
+    if ($request->has('tier')) {
+        $games->where('tier', $request->tier);
     }
+
+//    if ($request->has('exclusive')) {
+//        $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
+//        $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
+//        $games->where($platformArrayFiltered[0], 0)
+//            ->where($platformArrayFiltered[1], 0);
+//    }
+    return $games;
 });
 
 Route::get('/platform', function (){

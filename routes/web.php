@@ -23,3 +23,11 @@ Route::get('/game', 'GameController@index')->name('game.index');
 Route::get('/game/{game}', 'GameController@show')->name('game.show');
 
 Route::get('/search', 'SearchController@index')->name('search');
+
+Route::get('/vue/game', function () {
+    return view('vue.game');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
