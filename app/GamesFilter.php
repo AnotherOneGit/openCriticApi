@@ -26,4 +26,11 @@ class GamesFilter extends QueryFilter
     {
         $this->builder->where('tier', $value);
     }
+
+    public function score($value)
+    {
+        if ($value) {
+            $this->builder->where('topCriticScore', '>', $value);
+        }
+    }
 }

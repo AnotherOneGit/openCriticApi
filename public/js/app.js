@@ -37653,52 +37653,51 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "filter" }, [
             _c("div", { staticClass: "form-check" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.is_major,
-                    expression: "is_major"
-                  }
-                ],
-                staticClass: "form-check-input",
-                attrs: { value: "1", type: "checkbox", id: "is_major" },
-                domProps: {
-                  checked: Array.isArray(_vm.is_major)
-                    ? _vm._i(_vm.is_major, "1") > -1
-                    : _vm.is_major
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.is_major,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "1",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 && (_vm.is_major = $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            (_vm.is_major = $$a
-                              .slice(0, $$i)
-                              .concat($$a.slice($$i + 1)))
-                        }
-                      } else {
-                        _vm.is_major = $$c
-                      }
-                    },
-                    _vm.fetch
-                  ]
-                }
-              }),
-              _vm._v(" "),
               _c(
                 "label",
                 { staticClass: "form-check-label", attrs: { for: "is_major" } },
                 [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.is_major,
+                        expression: "is_major"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    attrs: { type: "checkbox", id: "is_major" },
+                    domProps: {
+                      checked: Array.isArray(_vm.is_major)
+                        ? _vm._i(_vm.is_major, null) > -1
+                        : _vm.is_major
+                    },
+                    on: {
+                      change: [
+                        function($event) {
+                          var $$a = _vm.is_major,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 && (_vm.is_major = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.is_major = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.is_major = $$c
+                          }
+                        },
+                        _vm.fetch
+                      ]
+                    }
+                  }),
                   _vm._v(
                     "\n                            Major\n                        "
                   )
@@ -37709,6 +37708,9 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "filter" }, [
             _c("label", [
+              _vm._v("Top Critic Score "),
+              _c("h1", [_vm._v(" > ")]),
+              _vm._v(" "),
               _c("input", {
                 directives: [
                   {
@@ -37719,16 +37721,18 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "date", placeholder: "First Release Date" },
+                attrs: { type: "number" },
                 domProps: { value: _vm.score },
                 on: {
-                  change: _vm.fetch,
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.score = $event.target.value
-                  }
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.score = $event.target.value
+                    },
+                    _vm.fetch
+                  ]
                 }
               })
             ])

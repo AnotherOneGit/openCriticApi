@@ -20,15 +20,15 @@
                 </div>
                 <div class="filter">
                     <div class="form-check">
-                        <input value="1" v-model="is_major" class="form-check-input" type="checkbox" id="is_major" @change="fetch">
                         <label class="form-check-label" for="is_major">
+                        <input v-model="is_major" class="form-check-input" type="checkbox" id="is_major" @change="fetch" >
                             Major
                         </label>
                     </div>
                 </div>
                 <div class="filter">
-                    <label>
-                        <input v-model="score" type="date" class="form-control" placeholder="First Release Date" @change="fetch">
+                    <label>Top Critic Score <h1> > </h1>
+                        <input v-model="score" type="number" class="form-control" @input="fetch">
                     </label>
                 </div>
 
