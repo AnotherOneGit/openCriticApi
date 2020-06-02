@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Game;
+use App\GamesFilter;
 use App\Genre;
 use App\Platform;
 use App\User;
@@ -24,24 +25,26 @@ class GameController extends Controller
 
         $games=Game::with('platforms');
 
-        if ($request->has('name')) {
-            $games->where('name', 'like', "%$request->name%");
-        }
+        $games = (new GamesFilter($games, $request))->apply()->get();
 
-        if ($request->has('is_major')) {
-            $games->where('isMajorTitle', $request->is_major);
-        }
-
-        if ($request->has('tier')) {
-            $games->where('tier', $request->tier);
-        }
-
-        if ($request->has('exclusive')) {
-            $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
-            $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
-            $games->where($platformArrayFiltered[0], 0)
-            ->where($platformArrayFiltered[1], 0);
-        }
+//        if ($request->has('name')) {
+//            $games->where('name', 'like', "%$request->name%");
+//        }
+//
+//        if ($request->has('is_major')) {
+//            $games->where('isMajorTitle', $request->is_major);
+//        }
+//
+//        if ($request->has('tier')) {
+//            $games->where('tier', $request->tier);
+//        }
+//
+//        if ($request->has('exclusive')) {
+//            $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
+//            $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
+//            $games->where($platformArrayFiltered[0], 0)
+//            ->where($platformArrayFiltered[1], 0);
+//        }
 
 //        if ($request->has('genre')) {
 //            $games = Genre::where('name', \request('genre'))->firstOrFail()->game;
@@ -52,7 +55,7 @@ class GameController extends Controller
 //        }
 
 
-        $games = $games->get();
+//        $games = $games->get();
 
 
 
