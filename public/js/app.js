@@ -37738,6 +37738,30 @@ var render = function() {
             _c(
               "button",
               {
+                staticClass: "btn btn-primary",
+                attrs: { type: "submit", disabled: _vm.busy },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.fetch($event)
+                  }
+                }
+              },
+              [
+                _vm.busy
+                  ? _c("i", { staticClass: "fa fa-spin fa-spinner" })
+                  : _vm._e(),
+                _vm._v(
+                  "\n                        Filter!\n                    "
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "submit" }, [
+            _c(
+              "button",
+              {
                 staticClass: "btn btn-danger",
                 attrs: { type: "submit", disabled: _vm.busy },
                 on: {

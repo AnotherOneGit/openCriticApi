@@ -17,4 +17,9 @@ class Game extends Model
     {
         return $this->belongsToMany(Platform::class);
     }
+
+    public function scopeFilter($builder, $filters)
+    {
+        return $filters->apply($builder);
+    }
 }

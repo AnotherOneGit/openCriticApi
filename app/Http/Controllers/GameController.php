@@ -20,12 +20,14 @@ class GameController extends Controller
      *
      * @return Factory|View
      */
-    public function index(Request $request)
+    public function index(Request $request, GamesFilter $filters)
     {
 
-        $games=Game::with('platforms');
+//        $games=Game::with('platforms');
 
-        $games = (new GamesFilter($games, $request))->apply()->get();
+        $games = Game::with('platforms')->filter($filters)->get();
+
+//        $games = (new GamesFilter($games, $request))->apply()->get();
 
 //        if ($request->has('name')) {
 //            $games->where('name', 'like', "%$request->name%");

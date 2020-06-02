@@ -32,12 +32,12 @@
                     </label>
                 </div>
 
-<!--                <div class="submit">-->
-<!--                    <button type="submit" @click.prevent="fetch" class="btn btn-primary" :disabled="busy">-->
-<!--                        <i v-if="busy" class="fa fa-spin fa-spinner"></i>-->
-<!--                        Filter!-->
-<!--                    </button>-->
-<!--                </div>-->
+                <div class="submit">
+                    <button type="submit" @click.prevent="fetch" class="btn btn-primary" :disabled="busy">
+                        <i v-if="busy" class="fa fa-spin fa-spinner"></i>
+                        Filter!
+                    </button>
+                </div>
 
                 <div class="submit">
                     <button type="submit" @click.prevent="reset" class="btn btn-danger"  :disabled="busy">

@@ -1,58 +1,157 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use App\Game;
+use App\GamesFilter;
 use App\Genre;
 use App\Platform;
+use App\User;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+class GameController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Factory|View
+     */
+    public function index(Request $request, GamesFilter $filters)
+    {
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//        $games=Game::with('platforms');
 
-Route::get('/game', function (Request $request) {
-    $games = Game::all();
+        $games = Game::with('platforms')->filter($filters)->get();
+
+//        $games = (new GamesFilter($games, $request))->apply()->get();
+
+//        if ($request->has('name')) {
+//            $games->where('name', 'like', "%$request->name%");
+//        }
 //
-//    if ($request->has('name')) {
-//        $games->where('name', 'like', "%$request->name%");
-//    }
+//        if ($request->has('is_major')) {
+//            $games->where('isMajorTitle', $request->is_major);
+//        }
 //
-//    if ($request->has('is_major')) {
-//        $games->where('isMajorTitle', $request->is_major);
-//    }
+//        if ($request->has('tier')) {
+//            $games->where('tier', $request->tier);
+//        }
 //
-    if ($request->has('tier')) {
-        $games->where('tier', $request->tier);
+//        if ($request->has('exclusive')) {
+//            $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
+//            $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
+//            $games->where($platformArrayFiltered[0], 0)
+//            ->where($platformArrayFiltered[1], 0);
+//        }
+
+//        if ($request->has('genre')) {
+//            $games = Genre::where('name', \request('genre'))->firstOrFail()->game;
+//        }
+//
+//        if ($request->has('platform')) {
+//            $games = Platform::where('name', \request('platform'))->firstOrFail()->game;
+//        }
+
+
+//        $games = $games->get();
+
+
+
+
+
+
+
+
+        ;
+//        } elseif (\request('sort'))
+//        {
+//            $games = Game::all()->sortByDesc(\request('sort'));
+//        }
+//        elseif (\request('exclusive'))
+//        {
+//            $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
+//            $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
+//            $games=Game::all()->where($platformArrayFiltered[0], 0)
+//                              ->where($platformArrayFiltered[1], 0)
+//                ->sortByDesc('averageScore')
+//            ;
+//        }
+//         else {
+//            $games=Game::all()
+//                ->sortByDesc('averageScore')
+//            ;
+//        }
+
+        return view('games.index', ['games'=>$games]);
     }
 
-//    if ($request->has('exclusive')) {
-//        $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
-//        $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
-//        $games->where($platformArrayFiltered[0], 0)
-//            ->where($platformArrayFiltered[1], 0);
-//    }
-    return $games;
-});
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return void
+     */
+    public function create()
+    {
+        return ;
+    }
 
-Route::get('/platform', function (){
-    return Platform::all();
-});
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function store(Request $request)
+    {
+        return ;
+    }
 
-Route::get('/genre', function () {
-    return Genre::all();
-});
+    /**
+     * Display the specified resource.
+     *
+     * @param Game $game
+     * @return Factory|View
+     */
+    public function show($game)
+    {
+        return view('games.game', ['game'=> Game::where('id', $game)->firstOrFail()]);
+    }
 
-Route::get('/game/{game}', function ($game) {
-    return Game::where('id', $game)->firstOrFail();
-});
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param Game $game
+     * @return void
+     */
+    public function edit(Game $game)
+    {
+        return ;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param Game $game
+     * @return void
+     */
+    public function update(Request $request, Game $game)
+    {
+        return ;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Game $game
+     * @return void
+     */
+    public function destroy(Game $game)
+    {
+        return ;
+    }
+}
