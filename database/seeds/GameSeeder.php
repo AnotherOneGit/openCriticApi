@@ -20,7 +20,7 @@ class GameSeeder extends Seeder
                             'percentRecommended' => substr($game->percentRecommended, 0, 2),
                             'numReviews' => $game->numReviews,
                             'numTopCriticReviews' => $game->numTopCriticReviews,
-                            'medianScore' => $game->medianScore,
+                            'medianScore' => substr($game->medianScore, 0, 2),
                             'averageScore' => substr($game->averageScore, 0, 2),
                             'topCriticScore' => substr($game->topCriticScore, 0, 2),
                             'percentile' => $game->percentile,
