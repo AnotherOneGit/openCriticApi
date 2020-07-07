@@ -4,12 +4,12 @@
         <div class="col-12">
             <form class="d-flex justify-content-around">
                 <div class="filter">
-                    <label>
+                    <label>Name
                         <input v-model="name" type="text" class="form-control" placeholder="Name" @input="fetch">
                     </label>
                 </div>
                 <div class="filter">
-                    <label>
+                    <label>Tier
                         <select v-model="tier" class="form-control" @change="fetch">
                             <option value="Mighty">Mighty</option>
                             <option value="Strong">Strong</option>
@@ -17,31 +17,37 @@
                             <option value="Weak">Weak</option>
                         </select>
                     </label>
+                    <label>Exclusive
+                        <select v-model="exclusive" class="form-control" @change="fetch">
+                            <option value="Sony">Sony</option>
+                            <option value="Microsoft">Microsoft</option>
+                            <option value="Nintendo">Nintendo</option>
+                        </select>
+                    </label>
                 </div>
                 <div class="filter">
                     <div class="form-check">
-                        <label class="form-check-label" for="is_major">
+
                         <input v-model="is_major" class="form-check-input" type="checkbox" id="is_major" @change="fetch" >
-                            Major
-                        </label>
+                        <label for="is_major"> Major                        </label>
                     </div>
                 </div>
                 <div class="filter">
-                    <label>Top Critic Score <h1> > </h1>
-                        <input v-model="score" type="number" class="form-control" @input="fetch">
+                    <label>Score
+                        <input v-model="score" type="number" class="form-control" @input="fetch" placeholder="Top Critic Score">
                     </label>
                 </div>
 
                 <div class="submit">
                     <button type="submit" @click.prevent="fetch" class="btn btn-primary" :disabled="busy">
-                        <i v-if="busy" class="fa fa-spin fa-spinner"></i>
+<!--                        <i v-if="busy" class="fa fa-spin fa-spinner"></i>-->
                         Filter!
                     </button>
                 </div>
 
                 <div class="submit">
                     <button type="submit" @click.prevent="reset" class="btn btn-danger"  :disabled="busy">
-                        <i v-if="busy" class="fa fa-spin fa-spinner"></i>
+<!--                        <i v-if="busy" class="fa fa-spin fa-spinner"></i>-->
                         Reset!
                     </button>
                 </div>
@@ -57,6 +63,7 @@
                         <th>Tier</th>
                         <th>Major</th>
                         <th>Score</th>
+                        <th>Platforms</th>
                     </tr>
 
                     <tr v-for="game in games">
@@ -64,6 +71,11 @@
                         <td>{{ game.tier}}</td>
                         <td>{{ game.isMajorTitle ? "Yes" : "No" }}</td>
                         <td>{{ game.topCriticScore }}</td>
+                        <td>
+                        <p v-if="game.Sony">PS</p>
+                        <p v-if="game.Microsoft"> Mike </p>
+                        <p v-if="game.Nintendo"> Nina </p>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -80,6 +92,7 @@
                 tier: null,
                 is_major: null,
                 score: null,
+                exclusive:null,
                 games: [],
                 busy: false
             }
@@ -91,6 +104,7 @@
                 this.score = null
                 this.is_major = null
                 this.tier = null
+                this.exclusive = null
                 this.fetch()
             },
             fetch() {
@@ -100,7 +114,8 @@
                         name: this.name,
                         tier: this.tier,
                         is_major: this.is_major,
-                        score: this.score
+                        score: this.score,
+                        exclusive: this.exclusive
                     }
                 })
                     .then(response => {

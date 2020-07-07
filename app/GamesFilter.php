@@ -11,7 +11,11 @@ class GamesFilter extends QueryFilter
 
     public function is_major($value)
     {
-        $this->builder->where('isMajorTitle', $value);
+        if ($value == 'true') {
+            $this->builder->where('isMajorTitle', true);
+        } else {
+            $this->builder->where('isMajorTitle', false);
+        }
     }
 
     public function exclusive($value)
@@ -33,4 +37,9 @@ class GamesFilter extends QueryFilter
             $this->builder->where('topCriticScore', '>', $value);
         }
     }
-}
+
+    //    public function sort()
+    //    {
+    //        $this->builder->sortbyDesc('topCriticScore');
+    //    }
+    }

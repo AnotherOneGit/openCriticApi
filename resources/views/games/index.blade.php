@@ -24,7 +24,7 @@
 
         <label>Major
 {{--            <input type="radio" name="is_major">--}}
-            <input type="checkbox" name="is_major" value="1" id="is_major" {{ request()->is_major == 1 ? 'checked' : '' }}>
+            <input type="checkbox" name="is_major" id="is_major" value="true" {{ request()->is_major ? 'checked' : '' }}>
         </label>
 
         <label for="tier">Tier

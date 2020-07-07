@@ -1982,6 +1982,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1989,6 +2001,7 @@ __webpack_require__.r(__webpack_exports__);
       tier: null,
       is_major: null,
       score: null,
+      exclusive: null,
       games: [],
       busy: false
     };
@@ -1999,6 +2012,7 @@ __webpack_require__.r(__webpack_exports__);
       this.score = null;
       this.is_major = null;
       this.tier = null;
+      this.exclusive = null;
       this.fetch();
     },
     fetch: function fetch() {
@@ -2010,7 +2024,8 @@ __webpack_require__.r(__webpack_exports__);
           name: this.name,
           tier: this.tier,
           is_major: this.is_major,
-          score: this.score
+          score: this.score,
+          exclusive: this.exclusive
         }
       }).then(function (response) {
         _this.games = response.data;
@@ -37574,6 +37589,7 @@ var render = function() {
         _c("form", { staticClass: "d-flex justify-content-around" }, [
           _c("div", { staticClass: "filter" }, [
             _c("label", [
+              _vm._v("Name\n                        "),
               _c("input", {
                 directives: [
                   {
@@ -37603,6 +37619,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "filter" }, [
             _c("label", [
+              _vm._v("Tier\n                        "),
               _c(
                 "select",
                 {
@@ -37648,69 +37665,109 @@ var render = function() {
                   _c("option", { attrs: { value: "Weak" } }, [_vm._v("Weak")])
                 ]
               )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "filter" }, [
-            _c("div", { staticClass: "form-check" }, [
+            ]),
+            _vm._v(" "),
+            _c("label", [
+              _vm._v("Exclusive\n                        "),
               _c(
-                "label",
-                { staticClass: "form-check-label", attrs: { for: "is_major" } },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.is_major,
-                        expression: "is_major"
-                      }
-                    ],
-                    staticClass: "form-check-input",
-                    attrs: { type: "checkbox", id: "is_major" },
-                    domProps: {
-                      checked: Array.isArray(_vm.is_major)
-                        ? _vm._i(_vm.is_major, null) > -1
-                        : _vm.is_major
-                    },
-                    on: {
-                      change: [
-                        function($event) {
-                          var $$a = _vm.is_major,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 && (_vm.is_major = $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.is_major = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
-                            }
-                          } else {
-                            _vm.is_major = $$c
-                          }
-                        },
-                        _vm.fetch
-                      ]
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.exclusive,
+                      expression: "exclusive"
                     }
-                  }),
-                  _vm._v(
-                    "\n                            Major\n                        "
-                  )
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.exclusive = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.fetch
+                    ]
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "Sony" } }, [_vm._v("Sony")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Microsoft" } }, [
+                    _vm._v("Microsoft")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Nintendo" } }, [
+                    _vm._v("Nintendo")
+                  ])
                 ]
               )
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "filter" }, [
-            _c("label", [
-              _vm._v("Top Critic Score "),
-              _c("h1", [_vm._v(" > ")]),
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.is_major,
+                    expression: "is_major"
+                  }
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "is_major" },
+                domProps: {
+                  checked: Array.isArray(_vm.is_major)
+                    ? _vm._i(_vm.is_major, null) > -1
+                    : _vm.is_major
+                },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.is_major,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.is_major = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.is_major = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.is_major = $$c
+                      }
+                    },
+                    _vm.fetch
+                  ]
+                }
+              }),
               _vm._v(" "),
+              _c("label", { attrs: { for: "is_major" } }, [
+                _vm._v(" Major                        ")
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "filter" }, [
+            _c("label", [
+              _vm._v("Score\n                        "),
               _c("input", {
                 directives: [
                   {
@@ -37721,7 +37778,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "number" },
+                attrs: { type: "number", placeholder: "Top Critic Score" },
                 domProps: { value: _vm.score },
                 on: {
                   input: [
@@ -37752,9 +37809,6 @@ var render = function() {
                 }
               },
               [
-                _vm.busy
-                  ? _c("i", { staticClass: "fa fa-spin fa-spinner" })
-                  : _vm._e(),
                 _vm._v(
                   "\n                        Filter!\n                    "
                 )
@@ -37775,12 +37829,7 @@ var render = function() {
                   }
                 }
               },
-              [
-                _vm.busy
-                  ? _c("i", { staticClass: "fa fa-spin fa-spinner" })
-                  : _vm._e(),
-                _vm._v("\n                        Reset!\n                    ")
-              ]
+              [_vm._v("\n                        Reset!\n                    ")]
             )
           ])
         ])
@@ -37804,7 +37853,15 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(game.isMajorTitle ? "Yes" : "No"))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(game.topCriticScore))])
+                  _c("td", [_vm._v(_vm._s(game.topCriticScore))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    game.Sony ? _c("p", [_vm._v("PS")]) : _vm._e(),
+                    _vm._v(" "),
+                    game.Microsoft ? _c("p", [_vm._v(" Mike ")]) : _vm._e(),
+                    _vm._v(" "),
+                    game.Nintendo ? _c("p", [_vm._v(" Nina ")]) : _vm._e()
+                  ])
                 ])
               })
             ],
@@ -37827,7 +37884,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Major")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Score")])
+      _c("th", [_vm._v("Score")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Platforms")])
     ])
   }
 ]
