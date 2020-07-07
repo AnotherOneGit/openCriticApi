@@ -12,7 +12,7 @@
 {{--    <p>tier</p>--}}
 {{--@endif--}}
 
-
+<a href="/vue/game">Vue-version</a>
 <p>Hi! It's a "welcome page" 4 my site</p>
     <p>In tab Games u can see list of games from mySql and can sort it</p>
     <p>Each game have a link in self page, when u can see banner and clickable "tags"</p>

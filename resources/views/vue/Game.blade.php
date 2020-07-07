@@ -11,6 +11,7 @@
 <body>
 <div id="app">
     <div class="container">
+    <a href="/">Laravel-version</a>
         <game-list></game-list>
     </div>
 </div>
