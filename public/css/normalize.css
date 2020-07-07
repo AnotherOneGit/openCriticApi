@@ -186,6 +186,10 @@ img {
   border: 0;
 }
 
+.gamePic{
+    width: 350px;
+}
+
 /**
  * Correct overflow not hidden in IE 9/10/11.
  */
