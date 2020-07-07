@@ -25,7 +25,7 @@ Route::get('/game/{game}', 'GameController@show')->name('game.show');
 Route::get('/search', 'SearchController@index')->name('search');
 
 Route::get('/vue/game', function () {
-    return view('vue.game');
+    return view('vue.Game');
 });
 
 Auth::routes();
