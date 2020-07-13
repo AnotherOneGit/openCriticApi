@@ -22,36 +22,7 @@
 <h5>All this site exist thanks OpenCritic's Api, from which i can give data and push it in database</h5>
     <h6>Special thanks Laravel =)</h6>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif
-
 
 </div>
 @endsection
