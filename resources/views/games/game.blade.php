@@ -2,7 +2,6 @@
 
 @section('content')
     <h1>{{ $game->name }}</h1>
-    <img src="{{ $game->bannerScreenshot }}" alt="{{ $game->name }}" class="gamePic">
     <p>{{ $game->description }}</p>
     <br>
     Total Count Platforms: {{ count($game->platforms) }}
