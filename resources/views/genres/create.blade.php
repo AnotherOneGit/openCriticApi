@@ -10,7 +10,7 @@
                     <label for="">ID</label>
                     <div>
                         <input type="number" name="id" id="id"
-                               @error('id') style="border: 1px solid red" @enderror
+                            @error('id') style="border: 1px solid red" @enderror
                             value="{{ old('id') }}"
                         >
                         @error('id')
@@ -22,7 +22,7 @@
                     <label for="name">Name</label>
                     <div>
                         <input type="text" name="name" id="name"
-                               @error('name') style="border: 1px solid red" @enderror
+                            @error('name') style="border: 1px solid red" @enderror
                             value="{{ old('name') }}"
                         >
                         @error('name')
@@ -37,8 +37,8 @@
                     <label for="genre">Genre</label>
                     <div>
                         <select name="genre[]" id="genre"
-                               @error('name') style="border: 1px solid red" @enderror
-                               value="{{ old('name') }}"
+                            @error('name') style="border: 1px solid red" @enderror
+                            value="{{ old('name') }}"
                         >
                             @foreach($genres as $genre)
                                 <option value="{{ $genre->id }}">{{ $genre->name }}</option>
