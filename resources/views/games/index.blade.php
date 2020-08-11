@@ -15,7 +15,7 @@
 
         <label for="exclusive">Exclusive
     <select name="exclusive" id="exclusive">
-        <option disabled selected value>Select platform</option>
+        <option value>Select platform</option>
         <option value="Sony" {{ request()->exclusive == 'Sony' ? 'selected' : '' }}>Sony</option>
         <option value="Microsoft"{{ request()->exclusive == 'Microsoft' ? 'selected' : '' }}>Microsoft</option>
         <option value="Nintendo"{{ request()->exclusive == 'Nintendo' ? 'selected' : '' }}>Nintendo</option>
@@ -29,7 +29,7 @@
 
         <label for="tier">Tier
         <select name="tier" id="tier">
-            <option disabled selected value>All</option>
+            <option value>All</option>
             <option value="Mighty" {{ request()->tier == 'Mighty' ? 'selected' : ''}}>Mighty!!!</option>
             <option value="Strong" {{ request()->tier == 'Strong' ? 'selected' : ''}}>Strong!!</option>
             <option value="Fair" {{ request()->tier == 'Fair' ? 'selected' : ''}}>Fair!</option>

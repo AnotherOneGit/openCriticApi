@@ -20,7 +20,8 @@ class GamesFilter extends QueryFilter
 
     public function exclusive($value)
     {
-        $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
+        if ($value)
+            $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
         $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
         $this->builder->where($platformArrayFiltered[0], 0)
             ->where($platformArrayFiltered[1], 0);
@@ -28,7 +29,8 @@ class GamesFilter extends QueryFilter
 
     public function tier($value)
     {
-        $this->builder->where('tier', $value);
+        if ($value)
+            $this->builder->where('tier', $value);
     }
 
     public function score($value)
@@ -42,4 +44,4 @@ class GamesFilter extends QueryFilter
     //    {
     //        $this->builder->sortbyDesc('topCriticScore');
     //    }
-    }
+}

@@ -59,13 +59,6 @@ class GameController extends Controller
 
 //        $games = $games->get();
 
-
-
-
-
-
-
-
             ;
 //        } elseif (\request('sort'))
 //        {
