@@ -29,7 +29,7 @@
                     <div class="form-check">
 
                         <input v-model="is_major" class="form-check-input" type="checkbox" id="is_major" @change="fetch" >
-                        <label for="is_major"> Major                        </label>
+                        <label for="is_major"> Major</label>
                     </div>
                 </div>
                 <div class="filter">
@@ -73,8 +73,8 @@
                         <td>{{ game.topCriticScore }}</td>
                         <td>
                         <p v-if="game.Sony">PS</p>
-                        <p v-if="game.Microsoft"> Mike </p>
-                        <p v-if="game.Nintendo"> Nina </p>
+                        <p v-if="game.Microsoft">Mike</p>
+                        <p v-if="game.Nintendo">Nina</p>
                         </td>
                     </tr>
                 </table>
