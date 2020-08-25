@@ -20,9 +20,9 @@ class GamesFilter extends QueryFilter
 
     public function exclusive($value)
     {
-        if ($value)
-            $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
+        $platformArray = ['Microsoft', 'Sony', 'Nintendo'];
         $platformArrayFiltered = array_values(array_diff($platformArray, [request('exclusive')]));
+        if ($value)
         $this->builder->where($platformArrayFiltered[0], 0)
             ->where($platformArrayFiltered[1], 0);
     }
